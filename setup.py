@@ -14,6 +14,6 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
-    install_requires=["pandas==1.0.0", "shapely==1.7.0", "numpy==1.18.1"],
+    install_requires=["pandas>=1.0.0", "shapely>=1.6.3", "numpy>=1.15.0"],
     python_requires=">=3.6",
 )
