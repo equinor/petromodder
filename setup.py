@@ -1,7 +1,7 @@
 import setuptools
 
 setuptools.setup(
-    name="pyPMod",
+    name="pypmod",
     version="0.0.1",
     author="Adam Cheng",
     author_email="tkc@equinor.com",
