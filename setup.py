@@ -16,5 +16,5 @@ setuptools.setup(
     ],
     install_requires=["pandas>=1.0.0", "shapely>=1.6.3", "tabulate>=0.8.3"],
     python_requires=">=3.6",
-    setup_requires=['setuptools-git-versioning'],
+    setup_requires=['setuptools-git-versioning'], 
 )
