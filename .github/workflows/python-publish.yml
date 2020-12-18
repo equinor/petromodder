@@ -34,4 +34,4 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.AZURE_TOKEN }}
       run: |
         python setup.py sdist bdist_wheel
-        twine upload dist/* --repository-url https://pkgs.dev.azure.com/Equinor/DIPVP/_packaging/ET_PSM/
+        twine upload dist/* --repository-url https://pkgs.dev.azure.com/Equinor/DIPVP/_packaging/ET_PSM/pypi/simple/
