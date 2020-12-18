@@ -2,7 +2,15 @@ import setuptools
 
 setuptools.setup(
     name="petromodder",
-    version_config=True,
+    version_config={
+        "template": "{tag}",
+        "dev_template": "{tag}",
+        "dirty_template": "{tag}",
+        "starting_version": "0.0.1",
+        "version_callback": None,
+        "version_file": None,
+        "count_commits_from_version_file": False
+    },
     author="Adam Cheng",
     author_email="tkc@equinor.com",
     description="Unofficial PetroMod API",
