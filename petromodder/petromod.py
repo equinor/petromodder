@@ -21,7 +21,6 @@ class PetroMod:
         self.heatflow_maps = self.path / "in//hf_m//cont.pmt"
         self.pwd_maps = self.path / "in//pdp_m//cont.pmt"
         self.maps = self.path / "in//ts1//bl1//"  # for subsheat building
-
     @property
     def path(self):
         return self._path
@@ -36,15 +35,15 @@ class PetroMod:
         Raises:
             Exception: Invalid PetroMod model
         """
-        check = 0
+        check_nr = 0
         for name in os.listdir(path):
             if "in" == name:
-                check += 1
+                check_nr += 1
             elif "def" == name:
-                check += 1
+                check_nr += 1
             else:
                 pass
-        if check != 2:
+        if check_nr != 2:
             raise Exception("Invalid PetroMod directory")
         else:
             print("Valid PetroMod model")
