@@ -26,7 +26,7 @@ setuptools.setup(
         "pandas>=1.0.0",
         "shapely>=1.6.3",
         "tabulate>=0.8.3",
-        "xtego>=2.14.1",
+        "xtgeo>=2.14.1",
     ],
     python_requires=">=3.6",
     setup_requires=["setuptools-git-versioning"],
