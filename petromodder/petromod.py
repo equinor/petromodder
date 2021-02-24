@@ -5,12 +5,12 @@ import os
 import xml.etree.ElementTree as ET
 import warnings
 import re
-from shapely.geometry import Point, Polygon,LineString
+from shapely.geometry import Point, Polygon, LineString
 import numpy as np
 import datetime
 import xtgeo
 
-tested_version = ["2017.1", "2019.1"]
+tested_version = ["2017.1", "2019.1", "2020.1"]
 
 
 class PetroMod:
@@ -21,6 +21,7 @@ class PetroMod:
         self.heatflow_maps = self.path / "in//hf_m//cont.pmt"
         self.pwd_maps = self.path / "in//pdp_m//cont.pmt"
         self.maps = self.path / "in//ts1//bl1//"  # for subsheat building
+
     @property
     def path(self):
         return self._path
@@ -614,7 +615,7 @@ class PetroMod:
             dict -- key: polygon name, value: Shapely object
         """
         poly_all = {}
-        line_all={}
+        line_all = {}
         filepath = self.path.parents[1] / "cult"
         fpath = filepath / item
         df = self.read_pmt(fpath)
@@ -646,5 +647,5 @@ class PetroMod:
                 coords = [p.coords[:][0] for p in Point_ls_pt]
                 poly = LineString(coords)
                 line_all.update({poly_name[ind]: poly})
-        line_poly = {"polygon":poly_all, "lines":line_all}
+        line_poly = {"polygon": poly_all, "lines": line_all}
         return line_poly
