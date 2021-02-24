@@ -9,7 +9,7 @@ setuptools.setup(
         "starting_version": "0.0.1",
         "version_callback": None,
         "version_file": None,
-        "count_commits_from_version_file": False
+        "count_commits_from_version_file": False,
     },
     author="Adam Cheng",
     author_email="tkc@equinor.com",
@@ -22,7 +22,12 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ],
-    install_requires=["pandas>=1.0.0", "shapely>=1.6.3", "tabulate>=0.8.3"],
+    install_requires=[
+        "pandas>=1.0.0",
+        "shapely>=1.6.3",
+        "tabulate>=0.8.3",
+        "xtego>=2.14.1",
+    ],
     python_requires=">=3.6",
-    setup_requires=['setuptools-git-versioning'], 
+    setup_requires=["setuptools-git-versioning"],
 )
