@@ -20,7 +20,7 @@ setuptools.setup(
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Operating System :: OS Independent",
+        "Operating System ::  POSIX :: Linux",
     ],
     install_requires=[
         "pandas>=1.0.0",
