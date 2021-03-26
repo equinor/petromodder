@@ -18,6 +18,16 @@ jobs:
         python-version: ['3.7', '3.8']
 
     steps:
+    - uses: Azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_KEY_VAULT }} # Define secret variable in repository settings as per action documentation
+          
+    - uses: Azure/get-keyvault-secrets@v1
+      with:
+          keyvault: "dipvp"
+          secrets: 'Azure-Blob-Admin-Conn-String'
+      id: myGetSecretAction
+      
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
@@ -32,4 +42,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Test with pytest
       run: |
-        pytest tests/ --constr="${{ secrets.AZURE_BLOB_TEST_DATA }}"
+        pytest tests/ --constr="${{ steps.myGetSecretAction.outputs.Azure-Blob-Admin-Conn-String}}"
