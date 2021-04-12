@@ -10,7 +10,7 @@ import numpy as np
 import datetime
 import xtgeo
 
-tested_version = ["2017.1", "2019.1", "2020.1"]
+tested_version = ["2019.1", "2020.1"]
 
 
 class PetroMod:
@@ -72,7 +72,7 @@ class PetroMod:
         for x in xml_root.findall("Meta"):
             m = {}
             for y in x.findall("MetaParameterGroup"):
-                for i in y.findall("Name"):
+                for j in y.findall("Name"):
                     # topname = i.text
                     name = []
                     value = []
