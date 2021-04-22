@@ -3,13 +3,13 @@ import pytest
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--constr",
+        "--azBlobKey",
         action="store",
         default="None",
-        help="Connection string to Azure Blob",
+        help="Access key to Azure Blob",
     )
 
 
 @pytest.fixture
 def constr(request):
-    return request.config.getoption("--constr")
+    return request.config.getoption("--azBlobKey")
