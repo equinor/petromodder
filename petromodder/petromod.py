@@ -97,48 +97,26 @@ class PetroMod:
         for x in xml_root.findall("LithologyGroup"):
             for y in x.findall("LithologyGroup"):
                 for i in y.findall("Lithology"):
-                    if self.version == "2017.1":
-                        for u in i.findall("PetroModId"):
-                            rock_name = u.text
-                            allgp = {}
-                            for u in i.findall("ParameterGroup"):
-                                for uu in u.findall("MetaParameterGroupId"):
-                                    # paramGP = uu.text
-                                    name = []
-                                    value = []
-                                    for uu in u.findall("Parameter"):
-                                        for uuu in uu.findall("MetaParameterId"):
-                                            paramid = meta[uuu.text]
-                                            name.append(paramid)
-                                        for uuu in uu.findall("Value"):
-                                            paramval = uuu.text
-                                            value.append(paramval)
-                                    temp = dict(zip(name, value))
-                                    # paramGP = {paramGP: temp}
-                                    allgp.update(temp)
-                            lith_id = {rock_name: allgp}
-                            lith.update(lith_id)
-                    elif self.version == "2019.1":
-                        for u in i.findall("Id"):
-                            rock_name = u.text
-                            allgp = {}
-                            for u in i.findall("ParameterGroup"):
-                                for uu in u.findall("MetaParameterGroupId"):
-                                    # paramGP = uu.text
-                                    name = []
-                                    value = []
-                                    for uu in u.findall("Parameter"):
-                                        for uuu in uu.findall("MetaParameterId"):
-                                            paramid = meta[uuu.text]
-                                            name.append(paramid)
-                                        for uuu in uu.findall("Value"):
-                                            paramval = uuu.text
-                                            value.append(paramval)
-                                    temp = dict(zip(name, value))
-                                    # paramGP = {paramGP: temp}
-                                    allgp.update(temp)
-                            lith_id = {rock_name: allgp}
-                            lith.update(lith_id)
+                    for u in i.findall("Id"):
+                        rock_name = u.text
+                        allgp = {}
+                        for u in i.findall("ParameterGroup"):
+                            for uu in u.findall("MetaParameterGroupId"):
+                                # paramGP = uu.text
+                                name = []
+                                value = []
+                                for uu in u.findall("Parameter"):
+                                    for uuu in uu.findall("MetaParameterId"):
+                                        paramid = meta[uuu.text]
+                                        name.append(paramid)
+                                    for uuu in uu.findall("Value"):
+                                        paramval = uuu.text
+                                        value.append(paramval)
+                                temp = dict(zip(name, value))
+                                # paramGP = {paramGP: temp}
+                                allgp.update(temp)
+                        lith_id = {rock_name: allgp}
+                        lith.update(lith_id)
         return lith
 
     @property
@@ -315,11 +293,11 @@ class PetroMod:
 
     @property
     def grid_size(self):
-        aoi_table = self.read_pmt(self.path / "in//aoi_m//cont.pmt")
+        aoi_table = self.read_pmt(self.path / "in//ts1//bl1//dpth_m//cont.pmt")
         aoi_file_name = aoi_table.ID[0]
         aoi_file_name = str(aoi_file_name)
         aoi_file_name = aoi_file_name + ".pmd"
-        aoi_map_path = self.path / "in//aoi_m//" / aoi_file_name
+        aoi_map_path = self.path / "in//ts1//bl1//dpth_m//" / aoi_file_name
         aoi = xtgeo.surface_from_file(aoi_map_path, fformat="petromod")
         if aoi.xinc != aoi.yinc:
             warnings.warn("Different x and y intervals is not supported")
