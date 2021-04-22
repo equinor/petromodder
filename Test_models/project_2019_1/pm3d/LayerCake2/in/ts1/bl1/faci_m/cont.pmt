@@ -1,0 +1,13 @@
+c
+c Standard Content [PetroMod 2019.1]
+c
+Head   |  ID  | Level |        Name        |
+Key    |  ID  | Level |     NameInTree     |
+Stop----------------------------------------
+Format | %4d  |  %2d  |         %s         |
+c-------------------------------------------
+Data   |    1 |     1 | Map_Layer_5_Facies |
+Data   |    2 |     1 | Map_Layer_4_Facies |
+Data   |    3 |     1 | Map_Layer_3_Facies |
+Data   |    4 |     1 | Map_Layer_2_Facies |
+Data   |    5 |     1 | Map_Layer_1_Facies |
