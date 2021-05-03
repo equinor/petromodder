@@ -299,8 +299,6 @@ class PetroMod:
         aoi_file_name = aoi_file_name + ".pmd"
         aoi_map_path = self.path / "in//ts1//bl1//dpth_m//" / aoi_file_name
         aoi = xtgeo.surface_from_file(aoi_map_path, fformat="petromod")
-        if aoi.xinc != aoi.yinc:
-            warnings.warn("Different x and y intervals is not supported")
         return {"xinc": aoi.xinc, "yinc": aoi.yinc}
 
     @property
