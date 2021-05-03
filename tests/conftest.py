@@ -11,5 +11,5 @@ def pytest_addoption(parser):
 
 
 @pytest.fixture
-def constr(request):
+def azBlobKey(request):
     return request.config.getoption("--azBlobKey")
