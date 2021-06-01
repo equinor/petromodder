@@ -44,11 +44,12 @@ class PetroMod:
                 check_nr += 1
             else:
                 pass
-        if check_nr != 2:
+        if check_nr < 1:
             raise Exception("Invalid PetroMod directory")
         else:
             print("Valid PetroMod model")
-        self.check_sublayer(path / "in//ts1//bl1//subl.pmt")
+        if os.path.exists(path / "in//ts1//bl1//subl.pmt"):
+            self.check_sublayer(path / "in//ts1//bl1//subl.pmt")
         self._path = path
         self.ndim
         if self.version not in tested_version:
@@ -279,11 +280,11 @@ class PetroMod:
     @property
     def version(self):
         version = []
-        fullpath = self.path / "in//aoigrid.pmt"
+        fullpath = self.path / "in//layerdef.pmt"
         while len(version) == 0:
             with (open(fullpath)) as f:
                 for line in f:
-                    if line.startswith("c AOI and Grid"):
+                    if line.startswith("c Age Assignment"):
                         version.append(line)
                         break
         version = str(version[0])
@@ -299,8 +300,6 @@ class PetroMod:
         aoi_file_name = aoi_file_name + ".pmd"
         aoi_map_path = self.path / "in//ts1//bl1//dpth_m//" / aoi_file_name
         aoi = xtgeo.surface_from_file(aoi_map_path, fformat="petromod")
-        if aoi.xinc != aoi.yinc:
-            warnings.warn("Different x and y intervals is not supported")
         return {"xinc": aoi.xinc, "yinc": aoi.yinc}
 
     @property
