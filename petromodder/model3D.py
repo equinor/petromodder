@@ -43,7 +43,7 @@ class Model3D(Base_Model):
         return self.model_path / "in//uni3.pmt"
 
     @property
-    def sub_version(self):
+    def minor_version(self):
         version = []
         fullpath = self.model_path / "in//layerdef.pmt"
         while len(version) == 0:
@@ -138,7 +138,7 @@ class Model3D(Base_Model):
             ["Format", "%4d", "%2d", "%s"],
         ]
         # update hf map index
-        output = Utils.write_pmt("Standard Content", df, 4, headers,self.sub_version)
+        output = Utils.write_pmt("Standard Content", df, 4, headers,self.minor_version)
         with open(self.heatflow_maps_index, "w+") as f:
             f.write(output)
         return map_dict
@@ -169,7 +169,7 @@ class Model3D(Base_Model):
             ["Key", "Age", "Mode", "Value", "Map"],
             ["Format", "%6.4f", "%d", "%6.4f", "%d"],
         ]
-        output = Utils.write_pmt("Heat Flow", df, 5, headers,self.sub_version)
+        output = Utils.write_pmt("Heat Flow", df, 5, headers,self.minor_version)
         with open(self.active_heatflow_model, "w+") as f:
             f.write(output)
         return
@@ -242,7 +242,7 @@ class Model3D(Base_Model):
             ["Format", "%4d", "%2d", "%s"],
         ]
         # update hf map index
-        output = Utils.write_pmt("Standard Content", df, 4, headers,self.sub_version)
+        output = Utils.write_pmt("Standard Content", df, 4, headers,self.minor_version)
         with open(self.pwd_maps_index, "w+") as f:
             f.write(output)
         return map_dict
@@ -277,7 +277,7 @@ class Model3D(Base_Model):
             ["Key", "AgeFrom", "Reference", "Layer", "Mode", "Value", "Map"],
             ["Format", "%6.4f", "%d", "%d", "%d", "%6.4f", "%d"],
         ]
-        output = Utils.write_pmt("Water Depth / Paleo Depth", df, 7, headers,self.sub_version)
+        output = Utils.write_pmt("Water Depth / Paleo Depth", df, 7, headers,self.minor_version)
         with open(self.active_pwd_model, "w+") as f:
             f.write(output)
         return

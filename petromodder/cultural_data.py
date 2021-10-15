@@ -6,11 +6,11 @@ from .utils import Utils
 from .logging import logger
 class Cultural_data:
     def __init__(self,project_path):
-        self.__cultural_path__ = project_path/ "cult"
+        self.__cultural_path = project_path/ "cult"
     @property
     def block_boundaries(self):
         exist = False
-        for f in os.listdir(self.__cultural_path__):
+        for f in os.listdir(self.__cultural_path):
             if f == "blockbound.pmt":
                 exist = True
                 break
@@ -23,7 +23,7 @@ class Cultural_data:
     @property
     def polygons(self):
         exist = False
-        for f in os.listdir(self.__cultural_path__ ):
+        for f in os.listdir(self.__cultural_path ):
             if f == "line.pmt":
                 exist = True
                 break
@@ -36,7 +36,7 @@ class Cultural_data:
     @property
     def crosslines(self):
         exist = False
-        for f in os.listdir(self.__cultural_path__ ):
+        for f in os.listdir(self.__cultural_path ):
             if f == "crossline.pmt":
                 exist = True
                 break
@@ -58,7 +58,7 @@ class Cultural_data:
         """
         poly_all = {}
         line_all = {}
-        fpath = self.__cultural_path__  / item
+        fpath = self.__cultural_path  / item
         df = Utils.read_pmt(fpath)
         poly_name = pd.unique(df["Name"])
         poly_id = pd.unique(df["GID"]).astype(int)

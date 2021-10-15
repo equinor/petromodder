@@ -2,7 +2,7 @@ import xml.etree.ElementTree as ET
 
 class Lithology:
     def __init__(self,project_path):
-        self.__lithology_path__ = project_path/ "geo//Lithologies.xml"
+        self.__lithology_path = project_path/ "geo//Lithologies.xml"
     @property
     def lithology(self):
         """Parse PetroMod lithology xml
@@ -11,8 +11,8 @@ class Lithology:
             dict -- Lithology properties by lithology code
         """
 
-        if self.__lithology_path__.exists():
-            tree = ET.parse(self.__lithology_path__)
+        if self.__lithology_path.exists():
+            tree = ET.parse(self.__lithology_path)
             root = tree.getroot()
             meta = self.litho_meta(root)
             litho = self.litho_lith(root, meta)
