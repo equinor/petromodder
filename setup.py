@@ -13,14 +13,13 @@ setuptools.setup(
     },
     author="Adam Cheng",
     author_email="tkc@equinor.com",
-    description="Unofficial PetroMod API",
-    long_description="Unofficial Python API for reading and writing PetroMod models",
+    description="Tools for manupulating PetroMod model",
+    long_description="Tools for manupulating PetroMod model. PetroMod is a registered trademark of Schlumberger",
     long_description_content_type="text/markdown",
     url="https://github.com/equinor/petromodder",
-    packages=setuptools.find_packages(),
+    packages=["petromodder"],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "Operating System ::  POSIX :: Linux",
     ],
     install_requires=[
         "pandas>=1.0.0",
