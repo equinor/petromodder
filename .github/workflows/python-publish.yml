@@ -54,7 +54,8 @@ jobs:
       name: Build doc
       run: |
         chmod 777 ./docs/Makefile
-        cd docs && make html && \
+        python -m pip install .
+        cd docs && make html
         cp -a ./build/html/. ./
         git config user.name github-actions
         git config user.email github-actions@github.com
