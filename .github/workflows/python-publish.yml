@@ -4,7 +4,6 @@
 name: Upload Python Package
  
 on:
-  workflow_dispatch:
   release:
     types: [published]
     
@@ -42,19 +41,19 @@ jobs:
         python -m pip install --upgrade pip
         pip install setuptools wheel twine sphinx
         
-    # - 
-    #   name: Build and publish
-    #   env:
-    #     TWINE_USERNAME: __token__
-    #     TWINE_PASSWORD: ${{ steps.myGetSecretAction.outputs.DevOps-token-read-write }}
-    #   run: |
-    #     python setup.py sdist bdist_wheel
-    #     twine upload dist/* --repository-url https://pkgs.dev.azure.com/Equinor/DIPVP/_packaging/ET_PSM/pypi/upload
+    - 
+      name: Build and publish
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ steps.myGetSecretAction.outputs.DevOps-token-read-write }}
+      run: |
+        python setup.py sdist bdist_wheel
+        twine upload dist/* --repository-url https://pkgs.dev.azure.com/Equinor/DIPVP/_packaging/ET_PSM/pypi/upload
     -
       name: Build doc
       run: |
         chmod 777 ./docs/Makefile
-        pip install . --no-deps
+        pip install .
         cd docs && make html && \
         cp -a ./build/html/. ./
     -
