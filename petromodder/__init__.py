@@ -1,6 +1,6 @@
-#from .petromod import *
 from .project import Project
 from .models import get_model
+from .model3D import Model3D
 
 from pkg_resources import get_distribution, DistributionNotFound
 try:

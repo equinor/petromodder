@@ -4,6 +4,11 @@ from .project_data import Project_data
 import os
 class Project:
     def __init__(self,project_path):
+        """Path to PetroMod project
+
+        :param project_path: Path to PetroMod project
+        :type project_path: str
+        """
         self.project_path = project_path
     @property
     def project_path(self):
@@ -32,6 +37,10 @@ class Project:
 
     @property
     def models_1D(self):
+        """List all 1D models
+        :return: Dict of 1D models. Key = name of models, value = path of models
+        :rtype: dict
+        """
         path = self.project_path/'pm1d'
         if path.exists():
             models = os.listdir(path)

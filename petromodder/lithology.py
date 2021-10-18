@@ -1,27 +1,33 @@
 import xml.etree.ElementTree as ET
 
 class Lithology:
+    """[summary]
+    """
     def __init__(self,project_path):
+        """Lithology data of the model
+
+        :param project_path: path to the projecy
+        :type project_path: Pathlib.PoxisPath/Pathlib.WindowsPath
+        """
         self.__lithology_path = project_path/ "geo//Lithologies.xml"
     @property
     def lithology(self):
-        """Parse PetroMod lithology xml
-        
-        Returns:
-            dict -- Lithology properties by lithology code
-        """
+        """Lithology properties by lithology code
 
+        :return: Lithology properties
+        :rtype: dict
+        """
         if self.__lithology_path.exists():
             tree = ET.parse(self.__lithology_path)
             root = tree.getroot()
-            meta = self.litho_meta(root)
-            litho = self.litho_lith(root, meta)
+            meta = self._litho_meta(root)
+            litho = self._litho_lith(root, meta)
         else:
             #log warning
             litho=False
         return litho
 
-    def litho_meta(self, xml_root):
+    def _litho_meta(self, xml_root):
         for x in xml_root.findall("Meta"):
             m = {}
             for y in x.findall("MetaParameterGroup"):
@@ -45,7 +51,7 @@ class Lithology:
                     m.update(temp)
         return m
 
-    def litho_lith(self, xml_root, meta):
+    def _litho_lith(self, xml_root, meta):
         lith = {}
         for x in xml_root.findall("LithologyGroup"):
             for y in x.findall("LithologyGroup"):
