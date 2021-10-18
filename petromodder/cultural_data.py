@@ -5,12 +5,24 @@ from shapely.geometry import Point, Polygon, LineString
 from .utils import Utils
 from .logging import logger
 class Cultural_data:
+    """Cultural data from the project. Contains both polylines and polygons
+    """
     def __init__(self,project_path):
-        self.__cultural_path__ = project_path/ "cult"
+        """Cultural data of the model
+
+        :param project_path: path to the project
+        :type project_path: Pathlib.PoxisPath/Pathlib.WindowsPath
+        """
+        self.__cultural_path = project_path/ "cult"
     @property
     def block_boundaries(self):
+        """Block boundaries as Shapely object
+
+        :return: Block boundaries
+        :rtype: dict
+        """
         exist = False
-        for f in os.listdir(self.__cultural_path__):
+        for f in os.listdir(self.__cultural_path):
             if f == "blockbound.pmt":
                 exist = True
                 break
@@ -22,8 +34,13 @@ class Cultural_data:
         return polygons
     @property
     def polygons(self):
+        """Polygons as Shapely object
+
+        :return: Polygons
+        :rtype: dict
+        """
         exist = False
-        for f in os.listdir(self.__cultural_path__ ):
+        for f in os.listdir(self.__cultural_path ):
             if f == "line.pmt":
                 exist = True
                 break
@@ -35,8 +52,13 @@ class Cultural_data:
         return polygons
     @property
     def crosslines(self):
+        """Cross lines as Shapely object
+
+        :return: Cross lines
+        :rtype: dict
+        """
         exist = False
-        for f in os.listdir(self.__cultural_path__ ):
+        for f in os.listdir(self.__cultural_path ):
             if f == "crossline.pmt":
                 exist = True
                 break
@@ -49,16 +71,15 @@ class Cultural_data:
 
     def make_polygons(self, item):
         """Make Shapely object from PetroMod polygons/lines
-        
-        Arguments:
-            item {path} -- PetroMod PMT file containing polygons/lines
-        
-        Returns:
-            dict -- key: polygon name, value: Shapely object
+
+        :param item: path of PetroMod PMT file containing polygons/lines
+        :type Pathlib.PoxisPath/Pathlib.WindowsPath
+        :return: dict of Shapely objects. Key = name in the model, value = Shapely object
+        :rtype: dict
         """
         poly_all = {}
         line_all = {}
-        fpath = self.__cultural_path__  / item
+        fpath = self.__cultural_path  / item
         df = Utils.read_pmt(fpath)
         poly_name = pd.unique(df["Name"])
         poly_id = pd.unique(df["GID"]).astype(int)

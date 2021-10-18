@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Welcome to petromodder’s documentation! &#8212; petromodder 0.0.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="welcome-to-petromodder-s-documentation">
+<h1>Welcome to petromodder’s documentation!<a class="headerlink" href="#welcome-to-petromodder-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>Utilities for reading and manupulating Schlumberger’s PetroMod data</p>
+<p>PetroMod is a registered trademark of Schlumberger</p>
+<span class="target" id="module-petromodder"></span><dl class="py class">
+<dt class="sig sig-object py" id="petromodder.Project">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">petromodder.</span></span><span class="sig-name descname"><span class="pre">Project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Project" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py property">
+<dt class="sig sig-object py" id="petromodder.Project.models_1D">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">models_1D</span></span><a class="headerlink" href="#petromodder.Project.models_1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all 1D models
+:return: Dict of 1D models. Key = name of models, value = path of models
+:rtype: dict</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="petromodder.Model3D">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">petromodder.</span></span><span class="sig-name descname"><span class="pre">Model3D</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object representing a 3D model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>Base_Model</strong> (<em>Base_Model</em>) – Base class of Model</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>3D Model</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>3D Model object</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.add_heatflow_maps">
+<span class="sig-name descname"><span class="pre">add_heatflow_maps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.add_heatflow_maps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add new heat flow maps to the model. Stored under directory structure if folder_name is defined</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map_dict</strong> (<em>dict</em>) – key = Age of the map in Ma, value = xtgeo RegularSurface</p></li>
+<li><p><strong>folder_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the new directory, defaults to None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Age and file name of the maps for writing active heat flow model</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.add_paleo_water_depth_maps">
+<span class="sig-name descname"><span class="pre">add_paleo_water_depth_maps</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.add_paleo_water_depth_maps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add new paleo water depth maps to the model. Stored under directory structure if folder_name is defined</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>map_dict</strong> (<em>dict</em>) – key = Age of the map in Ma, value = xtgeo RegularSurface</p></li>
+<li><p><strong>folder_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the new directory, defaults to None</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Age and file name of the maps for writing active paleo water depth model</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="petromodder.Model3D.depth_maps_index">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">depth_maps_index</span></span><a class="headerlink" href="#petromodder.Model3D.depth_maps_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory location of depth maps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path to depth maps storage location</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Pathlib.PoxisPath/Pathlib.WindowsPath</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="petromodder.Model3D.facies_maps_index">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">facies_maps_index</span></span><a class="headerlink" href="#petromodder.Model3D.facies_maps_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory location of facies maps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path to facies maps storage location</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Pathlib.PoxisPath/Pathlib.WindowsPath</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="petromodder.Model3D.geometry">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">geometry</span></span><a class="headerlink" href="#petromodder.Model3D.geometry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Geometry of the model inclusing depth maps, facies maps and ages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Geometry table</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.get_facies_table">
+<span class="sig-name descname"><span class="pre">get_facies_table</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.get_facies_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Facies definition table. Facies map code VS facies lithology code</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception</strong> – No facies table in the model</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Facies definition table</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.get_heatflow_age">
+<span class="sig-name descname"><span class="pre">get_heatflow_age</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.get_heatflow_age" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ages of heat flow maps that are currently active in the model
+:raises Exception: No active heat flow model defined in the model
+:return: Ages of active heat flow maps
+:rtype: 1D numpy array</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.get_heatflow_maps_index">
+<span class="sig-name descname"><span class="pre">get_heatflow_maps_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.get_heatflow_maps_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index for heat flow maps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception</strong> – No heatflow map in the model</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Heat flow map index</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.get_pwd_age">
+<span class="sig-name descname"><span class="pre">get_pwd_age</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.get_pwd_age" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ages of paleo water depth maps that are currently active in the model
+:raises Exception: No active paleo water depth model defined in the model
+:return: Ages of active paleo water depth maps
+:rtype: 1D numpy array</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.get_pwd_maps_index">
+<span class="sig-name descname"><span class="pre">get_pwd_maps_index</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.get_pwd_maps_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index for paleo water depth maps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception</strong> – No paleo water depth map in the model</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>paleo water depth map index</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Pandas DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="petromodder.Model3D.grid_size">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">grid_size</span></span><a class="headerlink" href="#petromodder.Model3D.grid_size" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grid cell size of al lthe maps in the map. All maps have to be of the same grid size in a model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>X and Y grid cell distance</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="petromodder.Model3D.heatflow_maps">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">heatflow_maps</span></span><a class="headerlink" href="#petromodder.Model3D.heatflow_maps" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory location of heat flow maps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Path to heat flow maps storage location</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Pathlib.PoxisPath/Pathlib.WindowsPath</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="petromodder.Model3D.heatflow_maps_index">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">heatflow_maps_index</span></span><a class="headerlink" href="#petromodder.Model3D.heatflow_maps_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>cont.pmt index file location for heat flow maps</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Location of heat flow index file</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Pathlib.PoxisPath/Pathlib.WindowsPath</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="petromodder.Model3D.minor_version">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">minor_version</span></span><a class="headerlink" href="#petromodder.Model3D.minor_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Major.minor version of the model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Minor version of the model</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.update_heatflow_model">
+<span class="sig-name descname"><span class="pre">update_heatflow_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.update_heatflow_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set active heat flow maps model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>map_dict</strong> (<em>dict</em>) – from add_heatflow_maps()</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="petromodder.Model3D.update_paleo_water_depth_model">
+<span class="sig-name descname"><span class="pre">update_paleo_water_depth_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">map_dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.Model3D.update_paleo_water_depth_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set active paleo water depth model</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>map_dict</strong> (<em>dict</em>) – from add_paleo_water_depth_maps()</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="petromodder.get_model">
+<span class="sig-prename descclassname"><span class="pre">petromodder.</span></span><span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#petromodder.get_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a model object from a path location. Currently only 3D model is supported</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model_path</strong> (<em>str</em>) – path to the model</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Model</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Model object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">petromodder</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="#">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Equinor 2021 - 2021 (petromodder release 0.0.2).
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

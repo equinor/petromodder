@@ -8,17 +8,44 @@ import numpy as np
 import pandas as pd
 
 class Model3D(Base_Model):
+    """Object representing a 3D model
+
+    :param Base_Model: Base class of Model
+    :type Base_Model: Base_Model
+    :return: 3D Model
+    :rtype: 3D Model object
+    """
     @property
     def facies_maps_index(self):
+        """Directory location of facies maps
+
+        :return: Path to facies maps storage location
+        :rtype: Pathlib.PoxisPath/Pathlib.WindowsPath
+        """
         return self.model_path / "in//ts1//bl1//faci_m//cont.pmt"
     @property
     def depth_maps_index(self):
+        """Directory location of depth maps
+
+        :return: Path to depth maps storage location
+        :rtype: Pathlib.PoxisPath/Pathlib.WindowsPath
+        """
         return self.model_path / "in//ts1//bl1//dpth_m//cont.pmt"
     @property
     def heatflow_maps_index(self):
+        """cont.pmt index file location for heat flow maps
+
+        :return: Location of heat flow index file
+        :rtype: Pathlib.PoxisPath/Pathlib.WindowsPath
+        """
         return self.model_path / "in//hf_m//cont.pmt"
     @property
     def heatflow_maps(self):
+        """Directory location of heat flow maps
+
+        :return: Path to heat flow maps storage location
+        :rtype: Pathlib.PoxisPath/Pathlib.WindowsPath
+        """
         return self.model_path / "in//hf_m"
     @property
     def active_heatflow_model(self):
@@ -43,7 +70,12 @@ class Model3D(Base_Model):
         return self.model_path / "in//uni3.pmt"
 
     @property
-    def sub_version(self):
+    def minor_version(self):
+        """Major.minor version of the model
+
+        :return: Minor version of the model
+        :rtype: str
+        """
         version = []
         fullpath = self.model_path / "in//layerdef.pmt"
         while len(version) == 0:
@@ -58,6 +90,11 @@ class Model3D(Base_Model):
         return version
     @property
     def geometry(self):
+        """Geometry of the model inclusing depth maps, facies maps and ages
+
+        :return: Geometry table
+        :rtype: Pandas DataFrame
+        """
         layerdef = Utils.read_pmt(self.model_path / "in//layerdef.pmt")
         horizongeom = Utils.read_pmt(self.model_path / "in//ts1//bl1//horizongeom.pmt")
         horizongeom = horizongeom[["HorizonID", "HorizonGeomID", "FaciesMapID"]]
@@ -67,6 +104,11 @@ class Model3D(Base_Model):
 
     @property
     def grid_size(self):
+        """Grid cell size of al lthe maps in the map. All maps have to be of the same grid size in a model
+
+        :return: X and Y grid cell distance
+        :rtype: dict
+        """
         aoi_table = Utils.read_pmt(self.depth_maps_index)
         aoi_file_name = aoi_table.ID[0]
         aoi_file_name = str(aoi_file_name)
@@ -77,6 +119,11 @@ class Model3D(Base_Model):
 
     
     def get_heatflow_age(self):
+        """Ages of heat flow maps that are currently active in the model
+        :raises Exception: No active heat flow model defined in the model
+        :return: Ages of active heat flow maps
+        :rtype: 1D numpy array
+        """
         try:
             df = Utils.read_pmt(self.active_heatflow_model)
             df = df["Age"].values
@@ -87,11 +134,14 @@ class Model3D(Base_Model):
 
 
     def add_heatflow_maps(self, map_dict, folder_name=None):
-        """[summary]
+        """Add new heat flow maps to the model. Stored under directory structure if folder_name is defined
 
-        Args:
-            map_dict (dict): Dictionary containing: Keys: Age of map in string. Value: HF map in xtgeo surface object
-            folder_name (str, optional): Name of folder of maps in PetroMod. Defaults to None.
+        :param map_dict: key = Age of the map in Ma, value = xtgeo RegularSurface
+        :type map_dict: dict
+        :param folder_name: Name of the new directory, defaults to None
+        :type folder_name: str, optional
+        :return: Age and file name of the maps for writing active heat flow model
+        :rtype: dict
         """
         # Check existing HF map index
         if self.heatflow_maps_index.exists():
@@ -138,12 +188,17 @@ class Model3D(Base_Model):
             ["Format", "%4d", "%2d", "%s"],
         ]
         # update hf map index
-        output = Utils.write_pmt("Standard Content", df, 4, headers,self.sub_version)
+        output = Utils.write_pmt("Standard Content", df, 4, headers,self.minor_version)
         with open(self.heatflow_maps_index, "w+") as f:
             f.write(output)
         return map_dict
 
     def update_heatflow_model(self, map_dict):
+        """Set active heat flow maps model
+
+        :param map_dict: from add_heatflow_maps()
+        :type map_dict: dict
+        """
         age = np.empty(0)
         maps_file_id = np.empty(0)
         for k, v in map_dict.items():
@@ -169,12 +224,18 @@ class Model3D(Base_Model):
             ["Key", "Age", "Mode", "Value", "Map"],
             ["Format", "%6.4f", "%d", "%6.4f", "%d"],
         ]
-        output = Utils.write_pmt("Heat Flow", df, 5, headers,self.sub_version)
+        output = Utils.write_pmt("Heat Flow", df, 5, headers,self.minor_version)
         with open(self.active_heatflow_model, "w+") as f:
             f.write(output)
         return
 
     def get_heatflow_maps_index(self):
+        """Index for heat flow maps
+
+        :raises Exception: No heatflow map in the model
+        :return: Heat flow map index
+        :rtype: Pandas DataFrame
+        """
         try:
             df = Utils.read_pmt(self.heatflow_maps_index)
             while df.shape[1] > 4:
@@ -186,14 +247,15 @@ class Model3D(Base_Model):
 
 
     def add_paleo_water_depth_maps(
-        self, map_dict, folder_name=None, update_model=False
-    ):
-        """[summary]
+        self, map_dict, folder_name=None    ):
+        """Add new paleo water depth maps to the model. Stored under directory structure if folder_name is defined
 
-        Args:
-            map_dict (dict): Dictionary containing: Keys: Age of map in string. Value: PWD map in xtgeo surface object
-            folder_name (str, optional): Name of folder of maps in PetroMod. Defaults to None.
-            update_model (bool, optional): Set PWD maps to active in PetroMod. Defaults to False.
+        :param map_dict: key = Age of the map in Ma, value = xtgeo RegularSurface
+        :type map_dict: dict
+        :param folder_name: Name of the new directory, defaults to None
+        :type folder_name: str, optional
+        :return: Age and file name of the maps for writing active paleo water depth model
+        :rtype: dict
         """
         # Check existing pwd map index
         if self.pwd_maps_index.exists():
@@ -242,12 +304,17 @@ class Model3D(Base_Model):
             ["Format", "%4d", "%2d", "%s"],
         ]
         # update hf map index
-        output = Utils.write_pmt("Standard Content", df, 4, headers,self.sub_version)
+        output = Utils.write_pmt("Standard Content", df, 4, headers,self.minor_version)
         with open(self.pwd_maps_index, "w+") as f:
             f.write(output)
         return map_dict
 
     def update_paleo_water_depth_model(self, map_dict):
+        """Set active paleo water depth model
+
+        :param map_dict: from add_paleo_water_depth_maps()
+        :type map_dict: dict
+        """
         age = np.empty(0)
         maps_file_id = np.empty(0)
         for k, v in map_dict.items():
@@ -277,12 +344,17 @@ class Model3D(Base_Model):
             ["Key", "AgeFrom", "Reference", "Layer", "Mode", "Value", "Map"],
             ["Format", "%6.4f", "%d", "%d", "%d", "%6.4f", "%d"],
         ]
-        output = Utils.write_pmt("Water Depth / Paleo Depth", df, 7, headers,self.sub_version)
+        output = Utils.write_pmt("Water Depth / Paleo Depth", df, 7, headers,self.minor_version)
         with open(self.active_pwd_model, "w+") as f:
             f.write(output)
         return
 
     def get_pwd_age(self):
+        """Ages of paleo water depth maps that are currently active in the model
+        :raises Exception: No active paleo water depth model defined in the model
+        :return: Ages of active paleo water depth maps
+        :rtype: 1D numpy array
+        """
         try:
             df = Utils.read_pmt(self.active_pwd_model)
             df = df["AgeFrom"].values
@@ -294,6 +366,12 @@ class Model3D(Base_Model):
         return df
 
     def get_pwd_maps_index(self):
+        """Index for paleo water depth maps
+
+        :raises Exception: No paleo water depth map in the model
+        :return: paleo water depth map index
+        :rtype: Pandas DataFrame
+        """
         try:
             df = Utils.read_pmt(self.pwd_maps_index)
             while df.shape[1] > 4:
@@ -303,6 +381,12 @@ class Model3D(Base_Model):
         return df
 
     def get_facies_table(self):
+        """Facies definition table. Facies map code VS facies lithology code
+
+        :raises Exception: No facies table in the model
+        :return: Facies definition table
+        :rtype: Pandas DataFrame
+        """
         try:
             df = Utils.read_pmt(self.facies_table)
         except:
