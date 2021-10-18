@@ -52,7 +52,7 @@ jobs:
     #     twine upload dist/* --repository-url https://pkgs.dev.azure.com/Equinor/DIPVP/_packaging/ET_PSM/pypi/upload
     -
       name: Build doc
-      run: 
+      run: |
         chmod 777 ./docs/Makefile
         pip install .
         cd docs && make html && \
@@ -60,7 +60,7 @@ jobs:
         ls ./docs
     -
       name: Commit changes
-      run : 
+      run : |
         ls ./docs
         echo `which git`
         git config user.name github-actions
