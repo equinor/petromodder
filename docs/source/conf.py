@@ -13,8 +13,9 @@
 import os
 import sys
 from datetime import date
-import petromodder
 sys.path.insert(0, os.path.abspath("."))
+import petromodder
+
 
 
 # -- Project information -----------------------------------------------------
