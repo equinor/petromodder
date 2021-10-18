@@ -1,0 +1,4 @@
+pandas>=1.0.0
+shapely>=1.6.3
+tabulate>=0.8.3
+xtgeo>=2.14.1
