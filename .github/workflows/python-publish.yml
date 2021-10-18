@@ -41,18 +41,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install setuptools wheel twine sphinx
         
-    - 
-      name: Build and publish
-      env:
-        TWINE_USERNAME: __token__
-        TWINE_PASSWORD: ${{ steps.myGetSecretAction.outputs.DevOps-token-read-write }}
-      run: |
-        python setup.py sdist bdist_wheel
-        twine upload dist/* --repository-url https://pkgs.dev.azure.com/Equinor/DIPVP/_packaging/ET_PSM/pypi/upload
+    # - 
+    #   name: Build and publish
+    #   env:
+    #     TWINE_USERNAME: __token__
+    #     TWINE_PASSWORD: ${{ steps.myGetSecretAction.outputs.DevOps-token-read-write }}
+    #   run: |
+    #     python setup.py sdist bdist_wheel
+    #     twine upload dist/* --repository-url https://pkgs.dev.azure.com/Equinor/DIPVP/_packaging/ET_PSM/pypi/upload
     -
       name: Build doc
       run: |
-        ./docs/make html
+        ./docs/make.bat html
         cp -a ./docs/build/html/. /docs/
         git config user.name github-actions
         git config user.email github-actions@github.com
