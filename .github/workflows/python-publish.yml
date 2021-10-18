@@ -54,7 +54,7 @@ jobs:
       name: Build doc
       run: |
         chmod 777 ./docs/Makefile
-        pip install .
+        pip install . --no-deps
         cd docs && make html && \
         cp -a ./build/html/. ./
     -
