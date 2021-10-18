@@ -57,10 +57,11 @@ jobs:
         pip install .
         cd docs && make html && \
         cp -a ./build/html/. ./
-        ls ./docs
+        ls
     -
       name: Commit changes
       run : |
+        ls
         ls ./docs
         echo `which git`
         git config user.name github-actions
