@@ -57,6 +57,7 @@ jobs:
         pip install .
         cd docs && make html && \
         cp -a ./build/html/. ./
+        ls ./docs
     -
       name: Commit changes
       run : 
