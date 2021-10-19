@@ -17,6 +17,10 @@ setuptools.setup(
     long_description="Tools for manupulating PetroMod model. PetroMod is a registered trademark of Schlumberger",
     long_description_content_type="text/markdown",
     url="https://github.com/equinor/petromodder",
+    project_urls={
+        "Documentation": "https://equinor.github.io/petromodder//",
+        "Issue Tracker": "https://github.com/equinor/petromodder/issues",
+    },
     packages=["petromodder"],
     classifiers=[
         "Programming Language :: Python :: 3",
