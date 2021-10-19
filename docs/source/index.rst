@@ -13,8 +13,11 @@ PetroMod is a registered trademark of Schlumberger
 .. automodule:: petromodder
 .. autoclass:: Project
    :members: 
+.. autoclass:: Project_data
+   :members:
 .. autoclass:: Model3D
    :members: 
+   :inherited-members:
 .. autofunction:: get_model
 
  

@@ -1,21 +1,18 @@
 import xml.etree.ElementTree as ET
 
 class Lithology:
-    """[summary]
+    """Lithology data of the project
     """
     def __init__(self,project_path):
-        """Lithology data of the model
-
-        :param project_path: path to the projecy
-        :type project_path: Pathlib.PoxisPath/Pathlib.WindowsPath
-        """
         self.__lithology_path = project_path/ "geo//Lithologies.xml"
     @property
     def lithology(self):
-        """Lithology properties by lithology code
+        """Lithology database of the project
 
-        :return: Lithology properties
-        :rtype: dict
+        Returns
+        -------
+        dict
+            Lithology database of the project
         """
         if self.__lithology_path.exists():
             tree = ET.parse(self.__lithology_path)
