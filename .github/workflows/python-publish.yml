@@ -53,12 +53,13 @@ jobs:
     -
       name: Build doc
       run: |
-      pip install
+        pip install
         chmod 777 ./docs/Makefile
         pip install .
         cd docs && make html && \
         cp -a ./build/html/. ./  && \
         rm -r ./build
+
     -
       name: Commit changes
       run : |
