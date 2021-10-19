@@ -16,20 +16,6 @@ jobs:
     steps:
 
     - 
-      uses: actions/checkout@v2
-    - 
-      uses: Azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_KEY_VAULT }} # Define secret variable in repository settings as per action documentation
-        
-    - 
-      uses: Azure/get-keyvault-secrets@v1
-      with:
-        keyvault: "dipvp"
-        secrets: 'DevOps-token-read-write'
-      id: myGetSecretAction
-      
-    - 
       name: Set up Python
 
       uses: actions/setup-python@v2
@@ -42,14 +28,14 @@ jobs:
         python -m pip install --upgrade pip
         pip install setuptools wheel twine sphinx
         
-    # - 
-    #   name: Build and publish
-    #   env:
-    #     TWINE_USERNAME: __token__
-    #     TWINE_PASSWORD: ${{ steps.myGetSecretAction.outputs.DevOps-token-read-write }}
-    #   run: |
-    #     python setup.py sdist bdist_wheel
-    #     twine upload dist/* --repository-url https://pkgs.dev.azure.com/Equinor/DIPVP/_packaging/ET_PSM/pypi/upload
+    - 
+      name: Build and publish
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+      run: |
+        python setup.py sdist bdist_wheel
+        twine upload dist/*
     -
       name: Build doc
       run: |
