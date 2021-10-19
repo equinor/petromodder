@@ -35,8 +35,8 @@ jobs:
         TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
       run: |
         ls
-        python setup.py sdist bdist_wheel
-        twine upload dist/*
+        #python setup.py sdist bdist_wheel
+        #twine upload dist/*
     -
       name: Build doc
       run: |
