@@ -6,7 +6,7 @@ setuptools.setup(
         "template": "{tag}",
         "dev_template": "{tag}",
         "dirty_template": "{tag}",
-        "starting_version": "0.0.1",
+        "starting_version": "0.0.2",
         "version_callback": None,
         "version_file": None,
         "count_commits_from_version_file": False,
