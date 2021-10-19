@@ -20,6 +20,8 @@ setuptools.setup(
     packages=["petromodder"],
     classifiers=[
         "Programming Language :: Python :: 3",
+        "License :: LGPL v3",
+        "Operating System :: OS Independent",
     ],
     install_requires=[
         "pandas>=1.0.0",
