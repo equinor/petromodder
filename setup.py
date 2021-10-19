@@ -35,5 +35,5 @@ setuptools.setup(
         "xtgeo>=2.14.1",
     ],
     python_requires=">=3.7,<=3.9.7",
-    setup_requires=['better-setuptools-git-version'],
+    setup_requires=["setuptools-git-versioning"],
 )
