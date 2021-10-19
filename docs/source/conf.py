@@ -33,9 +33,10 @@ copyright = "Equinor 2021 - " + str(date.today().year) + f" (petromodder release
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc'
+extensions = ['sphinx.ext.napoleon','sphinx.ext.autodoc'
 ]
-
+napoleon_numpy_docstring = True
+autodoc_member_order = 'groupwise'
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 

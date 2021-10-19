@@ -8,18 +8,15 @@ class Cultural_data:
     """Cultural data from the project. Contains both polylines and polygons
     """
     def __init__(self,project_path):
-        """Cultural data of the model
-
-        :param project_path: path to the project
-        :type project_path: Pathlib.PoxisPath/Pathlib.WindowsPath
-        """
         self.__cultural_path = project_path/ "cult"
     @property
     def block_boundaries(self):
-        """Block boundaries as Shapely object
+        """Block boundaries as Shapely objects
 
-        :return: Block boundaries
-        :rtype: dict
+        Returns
+        -------
+        dict
+            Block boundaries
         """
         exist = False
         for f in os.listdir(self.__cultural_path):
@@ -27,17 +24,19 @@ class Cultural_data:
                 exist = True
                 break
         if exist == True:
-            polygons = self.make_polygons("blockbound.pmt")
+            polygons = self._make_polygons("blockbound.pmt")
         else:
             polygons = None
             logger.info("No crossline in the project")
         return polygons
     @property
     def polygons(self):
-        """Polygons as Shapely object
+        """polygons as Shapely objects
 
-        :return: Polygons
-        :rtype: dict
+        Returns
+        -------
+        dict
+            polygons
         """
         exist = False
         for f in os.listdir(self.__cultural_path ):
@@ -45,17 +44,19 @@ class Cultural_data:
                 exist = True
                 break
         if exist == True:
-            polygons = self.make_polygons("line.pmt")
+            polygons = self._make_polygons("line.pmt")
         else:
             polygons = None
             logger.info("No polygon in the project")
         return polygons
     @property
     def crosslines(self):
-        """Cross lines as Shapely object
+        """cross linesas Shapely objects
 
-        :return: Cross lines
-        :rtype: dict
+        Returns
+        -------
+        dict
+            cross lines
         """
         exist = False
         for f in os.listdir(self.__cultural_path ):
@@ -63,20 +64,13 @@ class Cultural_data:
                 exist = True
                 break
         if exist == True:
-            polygons = self.make_polygons("crossline.pmt")
+            polygons = self._make_polygons("crossline.pmt")
         else:
             polygons = None
             logger.info("No crossline in the project")
         return polygons
 
-    def make_polygons(self, item):
-        """Make Shapely object from PetroMod polygons/lines
-
-        :param item: path of PetroMod PMT file containing polygons/lines
-        :type Pathlib.PoxisPath/Pathlib.WindowsPath
-        :return: dict of Shapely objects. Key = name in the model, value = Shapely object
-        :rtype: dict
-        """
+    def _make_polygons(self, item):
         poly_all = {}
         line_all = {}
         fpath = self.__cultural_path  / item
