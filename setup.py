@@ -20,7 +20,8 @@ setuptools.setup(
     packages=["petromodder"],
     classifiers=[
         "Programming Language :: Python :: 3",
-        "License :: LGPL v3",
+        "License :: OSI Approved :: GNU Lesser General Public "
+        "License v3 or later (LGPLv3+)",
         "Operating System :: OS Independent",
     ],
     install_requires=[
