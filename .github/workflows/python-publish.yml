@@ -42,7 +42,7 @@ jobs:
     -
       name: Build doc
       run: |
-        pip install .
+        pip install petromodder
         chmod 777 ./docs/Makefile
         pip install .
         cd docs && make html && \
