@@ -1,6 +1,6 @@
 # petromodder
 
-![Build Status](https://github.com/equinor/petromodder/action/workflows/python-publish.yml/badge.svg?branch=master)
+![Build Status](https://github.com/equinor/petromodder/actions/workflows/python-publish.yml/badge.svg?branch=master)
 
 Unofficial Python API for reading and manupulating PetroMod models
 
