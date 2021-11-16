@@ -18,7 +18,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/equinor/petromodder",
     project_urls={
-        "Documentation": "https://equinor.github.io/petromodder//",
+        "Documentation": "https://equinor.github.io/petromodder/",
         "Issue Tracker": "https://github.com/equinor/petromodder/issues",
     },
     packages=["petromodder"],
@@ -34,6 +34,6 @@ setuptools.setup(
         "tabulate>=0.8.3",
         "xtgeo>=2.14.1",
     ],
-    python_requires=">=3.7,<=3.9.8",
+    python_requires=">=3.7,<3.10",
     setup_requires=["setuptools-git-versioning"],
 )
