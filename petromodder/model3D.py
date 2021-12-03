@@ -165,12 +165,17 @@ class Model3D(Base_Model):
         dict
             X and Y grid cell distance. Key = 'xinc' and 'yinc'
         """
-        aoi_table = Utils.read_pmt(self.depth_maps_index)
-        aoi_file_name = aoi_table.ID[0]
-        aoi_file_name = str(aoi_file_name)
-        aoi_file_name = aoi_file_name + ".pmd"
-        aoi_map_path = self.depth_maps / aoi_file_name
-        aoi = xtgeo.surface_from_file(aoi_map_path, fformat="petromod")
+        # aoi_table = Utils.read_pmt(self.depth_maps_index)
+        # aoi_file_name = aoi_table.ID[0]
+        # aoi_file_name = str(aoi_file_name)
+        # aoi_file_name = aoi_file_name + ".pmd"
+        # aoi_map_path = self.depth_maps / aoi_file_name
+        # aoi = xtgeo.surface_from_file(aoi_map_path, fformat="petromod")
+        for file in os.listdir(self.depth_maps):
+            if file.endswith(".pmd"):
+                aoi_map_path = self.depth_maps / file
+                aoi = xtgeo.surface_from_file(aoi_map_path, fformat="petromod")
+                break
         return {"xinc": aoi.xinc, "yinc": aoi.yinc}
 
     
