@@ -1,4 +1,4 @@
-from azure.storage.blob import ContainerClient, BlobClient, BlobServiceClient
+from azure.storage.blob import  BlobClient
 import zipfile
 import petromodder
 
@@ -18,7 +18,8 @@ def test_2020(azBlobKey):
         zip_f.extractall("./")
 
     print("Instantiate a 2020 model")
-    pm = petromodder.PetroMod(".//2020_1//pm3d//LayerCake")
+    pm = petromodder.Project(".//2020_1/")
+    pm_mod=petromodder.get_model(pm.models_3D['LayerCake'])
     assert isinstance(pm.version, str)
 
 
@@ -38,6 +39,7 @@ def test_2019(azBlobKey):
         zip_f.extractall("./")
 
     print("Instantiate a 2019 model")
-    pm = petromodder.PetroMod(".//2019_1//pm3d//LayerCake")
+    pm = petromodder.Project(".//2019_1/")
+    pm_mod=petromodder.get_model(pm.models_3D['LayerCake'])
     assert pm.version == "2019.1"
 
