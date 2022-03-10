@@ -41,5 +41,5 @@ def test_2019(azBlobKey):
     print("Instantiate a 2019 model")
     pm = petromodder.Project(".//2019_1/")
     pm_mod=petromodder.get_model(pm.models_3D['LayerCake'])
-    assert pm.version == "2019.1"
+    assert pm.version == "2018"
 
