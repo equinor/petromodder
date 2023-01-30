@@ -2,3 +2,4 @@
 /build
 /petromodder.egg-info
 /dist
+*/__pycache__
