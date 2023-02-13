@@ -34,6 +34,6 @@ setuptools.setup(
         "tabulate>=0.8.3",
         "xtgeo>=2.14.1",
     ],
-    python_requires=">=3.7,<3.11",
+    python_requires=">=3.7,>=3.8,>=3.9,>=3.10",
     setup_requires=["setuptools-git-versioning"],
 )
